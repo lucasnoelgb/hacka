@@ -1,0 +1,36 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#e8f0e9"><title>Escrever | Lia</title><style>
+:root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #172c3b; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 28px 16px; background: linear-gradient(125deg, #d8eee1 0%, #dcebea 48%, #f0e7d9 100%); }
+main { width: min(100%, 900px); }
+.card { border-radius: 22px; background: #faf8ed; box-shadow: 0 20px 55px #25463c26; padding: clamp(20px, 4vw, 36px); }
+.brand-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+.brand { display: flex; align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 800; letter-spacing: -.04em; }
+.brand-mark { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #138d74; background: #d8f2e6; border: 2px solid #69c8a6; }
+.badge { border-radius: 999px; padding: 6px 11px; background: #e5f1ed; color: #247b70; font-size: .76rem; font-weight: 700; }
+h1 { margin: 0 0 9px; font-size: clamp(1.7rem, 4vw, 2.35rem); line-height: 1.12; letter-spacing: -.045em; }
+h2 { font-size: 1.2rem; letter-spacing: -.025em; margin: 0; }
+.intro, .desc { color: #63747a; line-height: 1.5; }
+.intro { margin: 0 0 25px; }
+.desc { font-size: .88rem; margin: 4px 0 0; }
+.nav-list { display: grid; gap: 14px; }
+.nav-button { display: flex; align-items: center; gap: 13px; border: 1px solid #dfe8dd; border-radius: 14px; padding: 17px; color: #173447; background: #fffef8; text-decoration: none; box-shadow: 0 5px 14px #25463c0d; transition: transform .15s, box-shadow .15s; }
+.nav-button:hover { transform: translateY(-2px); box-shadow: 0 9px 20px #25463c18; }
+.icon { display: grid; place-items: center; flex: 0 0 42px; height: 42px; border-radius: 13px; color: white; font-size: 1.1rem; font-weight: 800; background: linear-gradient(145deg, #177db1, #22a36c); }
+.arrow { margin-left: auto; color: #278e76; font-size: 1.2rem; font-weight: 800; }
+.feature { border: 1px solid #e6e8dc; border-radius: 17px; padding: 16px; background: #fffef8; }
+.feature-head { display: flex; align-items: center; gap: 11px; margin: 0 0 14px; }
+.player { overflow: hidden; border-radius: 13px; background: #172c3b; box-shadow: 0 8px 24px #203b3820; }
+video { display: block; width: 100%; max-height: 68vh; background: #172c3b; }
+.portrait video { max-height: 75vh; }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px; flex-wrap: wrap; }
+.volume { display: flex; align-items: center; gap: 8px; }
+.volume-label { color: #e7f2ed; font-size: .84rem; min-width: 80px; }
+button, .download, .back { appearance: none; border: 1px solid #d8e6dc; border-radius: 9px; background: #f7f8ed; color: #183645; padding: 9px 12px; font: inherit; font-weight: 750; cursor: pointer; text-decoration: none; }
+button:hover, .download:hover, .back:hover { filter: brightness(1.05); }
+.download { border: 0; color: #fff; background: linear-gradient(105deg, #177db1, #22a36c); }
+.back { display: inline-flex; margin: 0 0 16px; background: #e5f1ed; color: #247b70; }
+button:focus-visible, .download:focus-visible, .back:focus-visible, .nav-button:focus-visible { outline: 3px solid #f4a755; outline-offset: 3px; }
+.hint { color: #73827f; font-size: .84rem; line-height: 1.45; margin: 14px 2px 0; }
+@media (max-width: 430px) { .bar { align-items: stretch; } .volume { justify-content: center; } .download { text-align: center; width: 100%; } }
+</style></head><body><main><section class="card"><div class="brand-row"><div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><span>Lia</span></div><span class="badge">Demonstração</span></div><a class="back" href="index.html">← Voltar às opções</a><h1>Escrever</h1><p class="intro">Converse por mensagens de texto.</p><section class="feature"><div class="feature-head"><span class="icon" aria-hidden="true">✎</span><div><h2>Escrever</h2><p class="desc">Assista à demonstração da funcionalidade.</p></div></div><div class="player"><video id="demo" controls preload="metadata" playsinline><source src="gravacao-com-musica.mp4" type="video/mp4">Seu navegador não consegue reproduzir este vídeo. Baixe o arquivo pelo botão abaixo.</video><div class="bar"><div class="volume" aria-label="Controles de volume"><button id="down" type="button" aria-label="Diminuir volume">−</button><span class="volume-label" id="volume-label" aria-live="polite">Volume: 100%</span><button id="up" type="button" aria-label="Aumentar volume">+</button></div><a class="download" href="gravacao-com-musica.mp4" download="escrever.mp4">Baixar vídeo ↓</a></div></div></section><p class="hint">Use os botões + e − para ajustar o volume em passos de 10%.</p><script>const video=document.getElementById('demo');const label=document.getElementById('volume-label');function updateVolume(){label.textContent=`Volume: ${Math.round(video.volume*100)}%${video.muted?' (mudo)':''}`;}document.getElementById('down').addEventListener('click',()=>{video.muted=false;video.volume=Math.max(0,Math.round((video.volume-.1)*10)/10);updateVolume();});document.getElementById('up').addEventListener('click',()=>{video.muted=false;video.volume=Math.min(1,Math.round((video.volume+.1)*10)/10);updateVolume();});video.addEventListener('volumechange',updateVolume);updateVolume();</script></section></main></body></html>
